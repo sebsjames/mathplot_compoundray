@@ -1,15 +1,6 @@
-# mathplot_template
+# mathplot_compoundray
 
-This example project demonstrates how you
-can write and build a program that uses [mathplot](https://github.com/sebsjames/mathplot).
-
-Really, this project is just one `CMakeLists.txt` file containing the
-commands required to use mathplot and a single target (prog1),
-which compiles the example program `prog1.cpp`.
-
-To make your own program, you could either replace
-prog1.cpp with your own code, or incorporate the relevant parts of the
-CMakeLists.txt file into your own CMakeLists.txt in another project.
+This holds some mathplot examples that have been used with mplot::compoundray::Visual to output compoundray-compatible glTF world-model files.
 
 ## Dependencies
 
