@@ -77,32 +77,29 @@ target_include_directories(mplot_fontdata AFTER PRIVATE ${MPLOT_SOURCE_DIR})
 # Define a list of the modules we wish to compile into our library
 set(MY_MATHPLOT_MODULES
   ${MPLOT_CORE_MODULES}
-  ${MPLOT_SOURCE_DIR}/mplot/GraphVisual.cppm  # The example uses a GraphVisual
+  ${PROJECT_SOURCE_DIR}/mplot/compoundray/Visual.cppm
+  ${MPLOT_SOURCE_DIR}/mplot/CurvyTellyVisual.cppm
+  ${MPLOT_SOURCE_DIR}/mplot/RhomboVisual.cppm
+  ${MPLOT_SOURCE_DIR}/mplot/GridVisual.cppm
+  ${MPLOT_SOURCE_DIR}/mplot/VectorVisual.cppm
+  ${MPLOT_SOURCE_DIR}/mplot/SphereVisual.cppm
 )
 # De-duplicate the list
 list(REMOVE_DUPLICATES MY_MATHPLOT_MODULES)
 # Add a library called mathplot_modules
-add_library(mathplot_modules SHARED)
+add_library(mathplot_examples SHARED)
 # Attach the list of modules to the library
-target_sources(mathplot_modules
+target_sources(mathplot_examples
   PUBLIC FILE_SET CXX_MODULES BASE_DIRS ${PROJECT_SOURCE_DIR}
   FILES ${MY_MATHPLOT_MODULES}
 )
 # Set the include directories used when compiling this library
-target_include_directories(mathplot_modules AFTER PRIVATE ${OPENGL_INCLUDE_DIR} ${FREETYPE_INCLUDE_DIRS} ${MPLOT_SOURCE_DIR})
+target_include_directories(mathplot_examples AFTER PRIVATE ${OPENGL_INCLUDE_DIR} ${FREETYPE_INCLUDE_DIRS} ${MPLOT_SOURCE_DIR})
 # Link the OpenGL, Freetype and GLFW libraries to this internal library
-target_link_libraries(mathplot_modules OpenGL::GL Freetype::Freetype glfw glad mplot_fontdata)
+target_link_libraries(mathplot_examples OpenGL::GL Freetype::Freetype glfw glad mplot_fontdata)
 
 #
 # Now it's time to define how we will compile the program prog1
 #
 
-# The sample is compiled from a single c++ file
-add_executable(prog1 prog1.cpp)
-
-# Link our internal library mathplot_modules
-target_link_libraries(prog1 mathplot_modules)
-
-#
-# All done!
-#
+add_subdirectory(examples)
